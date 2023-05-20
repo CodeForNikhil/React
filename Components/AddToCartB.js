@@ -61,7 +61,7 @@ export default class Cart extends React.Component {
       <div>
         <div>
           <label htmlFor="item-select">Select an item:</label>
-          <select id="item-select" value={selectedItemId} onChange={this.handleSelectChange}>
+          <select id="item-select" onChange={this.handleSelectChange}>
             <option value="">-- Select --</option>
             {items.map((item) => (
               <option key={item.id} value={item.id}>
