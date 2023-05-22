@@ -6,7 +6,10 @@ export default class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [
+      items:
+      //  [],
+      [
+
                 {id:11,name:"pen", cost:20},
                 {id:12,name:"pen2",cost:30},
                 {id:13,name:"pencil",cost:10},
@@ -14,7 +17,7 @@ export default class Cart extends React.Component {
                 {id:15,name:"marker",cost:50},
                 {id:16,name:"ruler",cost:25}
       ],
-      selectedItemId: null,
+      selectedItemId: "",
       quantity: null,
       cartItems: [],
     };
@@ -24,29 +27,34 @@ export default class Cart extends React.Component {
     this.handleRemoveFromCart = this.handleRemoveFromCart.bind(this);
   }
 
-  handleSelectChange(event) {
-    const selectedItemId = parseInt(event.target.value);
-    const selectedItem = this.state.items.find((item) => item.id === selectedItemId);
+  // componentDidMount(){
+  //   axios.get('./shopstock.json').then((resp)=> {
+  //       this.setState({ items : resp.data})
+  //   })
+  // }
+  handleSelectChange(e) {
+    let selectedItemId = parseInt(e.target.value);
+    let selectedItem = this.state.items.find((item) => item.id === selectedItemId);
     this.setState({ selectedItemId, selectedItem });
   }
 
-  handleQuantityChange(event) {
-    const quantity = parseInt(event.target.value);
+  handleQuantityChange(e) {
+    let quantity = parseInt(e.target.value);
     this.setState({ quantity });
   }
 
   handleAddToCart() {
-    const { selectedItem, quantity } = this.state;
+    let { selectedItem, quantity } = this.state;
     if (selectedItem && quantity) {
-      const cartItem = { ...selectedItem, quantity };
-      const cartItems = [...this.state.cartItems, cartItem];
+      let cartItem = { ...selectedItem, quantity };
+      let cartItems = [...this.state.cartItems, cartItem];
       this.setState({ cartItems });
     }
   }
 
   handleRemoveFromCart(itemId) {
-    const cartItems = [...this.state.cartItems];
-    const indexToRemove = cartItems.findIndex((item) => item.id === itemId);
+    let cartItems = [...this.state.cartItems];
+    let indexToRemove = cartItems.findIndex((item) => item.id === itemId);
     if (indexToRemove >= 0) {
       cartItems.splice(indexToRemove, 1);
       this.setState({ cartItems });
@@ -54,18 +62,18 @@ export default class Cart extends React.Component {
   }
 
   render() {
-    const { items, selectedItemId, selectedItem, quantity, cartItems } = this.state;
-    const totalCost = selectedItem && quantity ? selectedItem.cost * quantity : null;
+    let { items, selectedItemId, selectedItem, quantity, cartItems } = this.state;
+    let totalCost = selectedItem && quantity ? selectedItem.cost * quantity : null;
 
     return (
       <div>
         <div>
-          <label htmlFor="item-select">Select an item:</label>
+          <label htmlFor="item-select">Select an item: </label>
           <select id="item-select" onChange={this.handleSelectChange}>
             <option value="">-- Select --</option>
             {items.map((item) => (
               <option key={item.id} value={item.id}>
-                {item.id}
+                {item.name}
               </option>
             ))}
           </select>
@@ -73,15 +81,15 @@ export default class Cart extends React.Component {
 
         {selectedItem && (
           <div>
-            <p>Item name: {selectedItem.name}</p>
+            <p>Item ID: {selectedItem.id}</p>
             <p>Unit cost: ₹{selectedItem.cost}</p>
           </div>
         )}
 
         {selectedItem && (
           <div>
-            <label htmlFor="quantity-input">Enter a quantity:</label>
-            <input type="number" id="quantity-input" value={quantity} onChange={this.handleQuantityChange} />
+            <label htmlFor="quantity-input">Enter a quantity: </label>
+            <input type="number" id="quantity-input" onChange={this.handleQuantityChange} min="1"/>
           </div>
         )}
 
@@ -96,6 +104,7 @@ export default class Cart extends React.Component {
           <table>
             <thead>
               <tr>
+                <th>Item ID</th>
                 <th>Item name</th>
                 <th>Unit cost</th>
                 <th>Qty</th>
@@ -107,10 +116,12 @@ export default class Cart extends React.Component {
             <tbody>
               {cartItems.map((cartItem) => (
                 <tr key={cartItem.id}>
+                  <td>{cartItem.id}</td>
                   <td>{cartItem.name}</td>
                   <td>₹{cartItem.cost}</td>
-                  <td><input type="number" value={cartItem.quantity} /></td>
+                  <td>{cartItem.quantity} </td>
                   <td>₹{cartItem.cost * cartItem.quantity}</td>
+                  <td><button onClick={() => this.handleRemoveFromCart(cartItem.id)}>Remove from cart</button></td>
                   </tr>
                   )
               )
