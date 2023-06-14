@@ -1,0 +1,93 @@
+<html>
+   <head>
+    <title>CURRENCY CONVERTOR</title>
+    <h1>CURRENCY CONVERTOR</h1>
+   </head>
+            
+    <script>
+        function f1()
+        {
+          let element=document.getElementById("p1")
+          let num=document.getElementById("id1").value
+          let str1=document.getElementById("s1").value
+          let str2=document.getElementById("s2").value
+            switch(str1)
+            {    
+                case "Rupees":
+                    if(str2=="doller")
+                    {
+                        element.innerHTML=num.concat("&#8377","=",num/81.74,"$")
+                    }    
+                    else if(str2=="Rupees")
+                    {
+                        element.innerHTML=num.concat("&#8377","=",num,"&#8377")
+                    }
+                    else if(str2=="Euro")
+                    {
+                        element.innerHTML=num.concat("&#8377","=",num*0.011,"&#8364")
+                    }
+                    break;
+
+                case "doller" :
+                    if(str2=="doller")
+                    {
+                        element.innerHTML=num.concat("$","=",num,"$")
+                    }
+                    else if(str2=="Rupees")
+                    {
+                        element.innerHTML=num.concat("$","=",num*81.74,"&#8377")
+                    }
+                    else if(str2=="Euro")
+                    {
+                        element.innerHTML=num.concat("$","=",num*(0.91),"&#8364")
+                    }
+                    break;
+                case "Euro" :
+                    if(str2=="doller")
+                    {
+                        element.innerHTML=num.concat("&#8364","=",num*1.10,"$")
+                    }
+                    else if(str2=="Rupees")
+                    {
+                        element.innerHTML=num.concat("&#8364","=",num*90.13,"&#8377")
+                    }
+                    else if(str2=="Euro")
+                    {
+                        element.innerHTML=num.concat("&#8364","=",num,"&#8364")
+                    }
+                    break;
+                    
+            }
+        
+        
+        }
+
+    </script>
+   
+   <body>
+        <lable>Amount:</lable>   
+        <input type="text" id="id1" placeholder="Enter Amount"/>
+    <pre>
+        FROM:<select id="s1">
+            <option>SELECT</option>
+            <option value="Rupees">Rupees</option>
+            <option value="doller">dollar</option>
+            <option value="Euro">Euro</option>
+            </select>
+          
+        TO: <select id="s2">
+            <option>SELECT</option>
+            <option value="Rupees">Rupees</option>
+            <option value="doller">dollar</option>
+            <option value="Euro">Euro</option>
+            </select>  
+
+        <p id="p1"></p>
+        <button onclick="f1()">Convert</button>
+         
+        </pre>
+
+        
+   </body>
+
+</html>
