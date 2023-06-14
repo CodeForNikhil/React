@@ -1,9 +1,13 @@
 <html>
 <head>
     <title>Currency Converter</title>
-</head>
-<body>
-    <script>
+    <style>
+        table,tr,td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+      <script>
         function f1()
         {
           let element=document.getElementById("p1")
@@ -58,8 +62,10 @@
             }
         }
     </script>
-    
-        <div>
+
+</head>
+<body>
+    <div>
         <table>
             <thead>
                 <th>
@@ -99,9 +105,12 @@
                 <td>
                   <button onclick="f1()">Convert</button>
                 </td>
+                <td>
+                  <span id="p1"></span>
+                </td>
             </tr>
         </table>
-        <p id="p1"></p>
+
     </div>
 </body>
 </html>
