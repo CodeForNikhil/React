@@ -1,0 +1,107 @@
+<html>
+<head>
+    <title>Currency Converter</title>
+</head>
+<body>
+    <script>
+        function f1()
+        {
+          let element=document.getElementById("p1")
+          let num=document.getElementById("id1").value
+          let str1=document.getElementById("s1").value
+          let str2=document.getElementById("s2").value
+            switch(str1)
+            {    
+                case "Rupees":
+                    if(str2=="Dollar")
+                    {
+                        element.innerHTML=num.concat("&#8377","=","$",num/81.74)
+                    }    
+                    else if(str2=="Rupees")
+                    {
+                        element.innerHTML=num.concat("&#8377","=","&#8377",num)
+                    }
+                    else if(str2=="Euro")
+                    {
+                        element.innerHTML=num.concat("&#8377","=","&#8364",num*0.011)
+                    }
+                    break;
+
+                case "Dollar" :
+                    if(str2=="Dollar")
+                    {
+                        element.innerHTML=num.concat("$","=","$",num)
+                    }
+                    else if(str2=="Rupees")
+                    {
+                        element.innerHTML=num.concat("$","=","&#8377",num*81.74)
+                    }
+                    else if(str2=="Euro")
+                    {
+                        element.innerHTML=num.concat("$","=","&#8364",num*(0.91))
+                    }
+                    break;
+                case "Euro" :
+                    if(str2=="Dollar")
+                    {
+                        element.innerHTML=num.concat("&#8364","=","$",num*1.10)
+                    }
+                    else if(str2=="Rupees")
+                    {
+                        element.innerHTML=num.concat("&#8364","=","&#8377",num*90.13)
+                    }
+                    else if(str2=="Euro")
+                    {
+                        element.innerHTML=num.concat("&#8364","=","&#8364",num)
+                    }
+                    break;    
+            }
+        }
+    </script>
+    
+        <div>
+        <table>
+            <thead>
+                <th>
+                    <td>
+                        <label for="id1">Amount: </label>
+                        <input type="number" id="id1" placeholder="Enter Amount" min="0">
+                    </td>
+                </th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                    From:
+                    </td>
+                    <td>                     
+                    <select id ="s1">
+                        <option> Select </option>
+                        <option value="Rupees"> &#8377 </option>
+                        <option value="Dollar"> $ </option>
+                        <option value="Euro"> &#8364 </option>
+                    </select>
+                    </td>
+                    <td>
+                    To: 
+                    </td>
+                    <td>
+                        <select id ="s2">
+                            <option> Select </option>
+                            <option value="Rupees"> &#8377 </option>
+                            <option value="Dollar"> $ </option>
+                            <option value="Euro"> &#8364</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+            <tr>
+                <td>
+                  <button onclick="f1()">Convert</button>
+                </td>
+            </tr>
+        </table>
+        <p id="p1"></p>
+    </div>
+</body>
+</html>
